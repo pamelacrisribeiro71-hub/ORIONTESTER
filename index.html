@@ -3,20 +3,370 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Olá Mundo</title>
+  <title>GameZone | Olá Mundo Gamer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
-    body {
-      background: #fff;
-      color: #000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #111;
+      --bg-card: #1a1a2e;
+      --text: #eee;
+      --accent: #00ff88;
+      --accent-2: #ff00ff;
+      --accent-3: #00ccff;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Orbitron', sans-serif;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    /* ===== Header / Menu ===== */
+    header {
+      background: rgba(0, 0, 0, 0.85);
+      border-bottom: 2px solid var(--accent);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+
+    header .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 1.1rem;
+      color: var(--accent);
+      text-shadow: 0 0 10px var(--accent);
+      letter-spacing: 2px;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 0.5rem 0;
+      position: relative;
+      transition: color 0.3s, text-shadow 0.3s;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+      text-shadow: 0 0 8px var(--accent);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+      padding: 5rem 2rem 3rem;
+    }
+
+    .hero h1 {
+      font-family: 'Press Start 2P', cursive;
+      font-size: clamp(1.5rem, 5vw, 3rem);
+      color: var(--accent);
+      text-shadow: 0 0 20px var(--accent), 0 0 40px rgba(0, 255, 136, 0.5);
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: #aaa;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ===== Sections ===== */
+    section {
+      padding: 3rem 2rem;
+    }
+
+    section .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    section h2 {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 1.3rem;
+      color: var(--accent-3);
+      text-shadow: 0 0 12px var(--accent-3);
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+
+    /* ===== Notícias ===== */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      text-align: left;
+    }
+
+    .news-card {
+      background: var(--bg-card);
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 1.5rem;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    }
+
+    .news-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+      box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+    }
+
+    .news-card h3 {
+      color: var(--accent-2);
+      font-size: 1.05rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .news-card p {
+      color: #bbb;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .news-card a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: text-shadow 0.3s;
+    }
+
+    .news-card a:hover {
+      text-shadow: 0 0 8px var(--accent);
+    }
+
+    /* ===== Jogos ===== */
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .game-card {
+      background: var(--bg-card);
+      border: 1px solid #333;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    }
+
+    .game-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-2);
+      box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+    }
+
+    .game-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      background: #222;
+    }
+
+    .game-card .content {
+      padding: 1.25rem;
+    }
+
+    .game-card h3 {
+      color: var(--accent);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .game-card p {
+      color: #bbb;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .game-card a {
+      color: var(--accent-3);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: text-shadow 0.3s;
+    }
+
+    .game-card a:hover {
+      text-shadow: 0 0 8px var(--accent-3);
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      background: #0a0a0a;
+      border-top: 2px solid var(--accent);
+      padding: 2rem 1rem;
+      margin-top: 2rem;
+    }
+
+    footer p {
+      color: #666;
+      font-size: 0.85rem;
+    }
+
+    footer .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ===== Responsivo ===== */
+    @media (max-width: 600px) {
+      header .container {
+        flex-direction: column;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: center;
+      }
+
+      .hero {
+        padding: 3rem 1rem 2rem;
+      }
+
+      section {
+        padding: 2rem 1rem;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Olá Mundo</h1>
+
+  <header>
+    <div class="container">
+      <div class="logo">GAMEZONE</div>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Notícias</a></li>
+          <li><a href="#">Jogos</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero">
+    <h1>Olá Mundo Gamer</h1>
+    <p>Bem-vindo ao seu portal definitivo de notícias, jogos e cultura geek!</p>
+  </div>
+
+  <section id="noticias">
+    <div class="container">
+      <h2>Últimas Notícias Gamer</h2>
+      <div class="news-grid">
+        <div class="news-card">
+          <h3>Novo Console Anunciado</h3>
+          <p>A próxima geração de consoles promete gráficos em 8K e tempos de carregamento quase instantâneos.</p>
+          <a href="#">Leia mais →</a>
+        </div>
+        <div class="news-card">
+          <h3>Game Awards 2026</h3>
+          <p>Confira os indicados ao prêmio de Jogo do Ano e vote no seu favorito.</p>
+          <a href="#">Leia mais →</a>
+        </div>
+        <div class="news-card">
+          <h3>eSports em Alta</h3>
+          <p>Campeonato brasileiro de eSports bate recorde de audiência mundial.</p>
+          <a href="#">Leia mais →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="jogos">
+    <div class="container">
+      <h2>Indicações de Jogos</h2>
+      <div class="games-grid">
+        <div class="game-card">
+          <img src="https://picsum.photos/seed/game1/400/200" alt="Capa do jogo Cyber Realms" loading="lazy">
+          <div class="content">
+            <h3>Cyber Realms</h3>
+            <p>Um RPG de mundo aberto em um futuro cyberpunk cheio de ação e escolhas.</p>
+            <a href="#">Ver detalhes →</a>
+          </div>
+        </div>
+        <div class="game-card">
+          <img src="https://picsum.photos/seed/game2/400/200" alt="Capa do jogo Star Raiders" loading="lazy">
+          <div class="content">
+            <h3>Star Raiders</h3>
+            <p>Explore a galáxia em batalhas espaciais multiplayer épicas.</p>
+            <a href="#">Ver detalhes →</a>
+          </div>
+        </div>
+        <div class="game-card">
+          <img src="https://picsum.photos/seed/game3/400/200" alt="Capa do jogo Pixel Quest" loading="lazy">
+          <div class="content">
+            <h3>Pixel Quest</h3>
+            <p>Uma aventura retrô de plataforma com visual pixel art e chefes desafiadores.</p>
+            <a href="#">Ver detalhes →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 GameZone. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
 </body>
 </html>
